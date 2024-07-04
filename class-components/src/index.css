@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body {
+  max-width: 100%;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -67,4 +71,30 @@ button:hover,
   padding: 0.6em 1.2em;
   max-width: 50em;
   width: 100%;
+  border-radius: 8px;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.film-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.film-title {
+  height: 4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.film-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
 }
