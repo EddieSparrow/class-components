@@ -78,12 +78,14 @@ class App extends Component {
     return (
       <ErrorBoundary>
         <div className="container">
-          <div className="search">
+          <div className="header">
             <CrashButton />
-            <input className="search-input" onKeyDown={this.handleEnterPress} typeof="search-input" value={input} onChange={this.handleInputChange}></input>
-            <button className="search-button" onClick={this.handleSubmit}>
-              Search
-            </button>
+            <div className="search">
+              <input className="search-input" onKeyDown={this.handleEnterPress} typeof="search-input" value={input} onChange={this.handleInputChange}></input>
+              <button className="search-button" onClick={this.handleSubmit}>
+                Search
+              </button>
+            </div>
           </div>
           <div className="results">
             {filmList.movie_count === 0 ? (

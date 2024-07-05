@@ -63,6 +63,7 @@ button:hover,
   display: flex;
   justify-content: end;
   gap: 1em;
+  width: 100%;
 }
 
 .search-input {
@@ -97,4 +98,12 @@ button:hover,
   height: 100%;
   object-fit: cover;
   border-radius: 15px;
+}
+
+.bad-search {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  font-size: 2rem;
+  text-transform: uppercase;
 }
