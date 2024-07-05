@@ -1,16 +1,16 @@
-import './App.css';
-import { ChangeEvent, Component } from 'react';
-import getPopular from './api/getPopular';
-import getSearch from './api/getSearch';
+import "./App.css";
+import { ChangeEvent, Component } from "react";
+import getPopular from "./api/getPopular";
+import getSearch from "./api/getSearch";
 
 class App extends Component {
   state = {
-    input: localStorage.getItem('input') || '',
+    input: localStorage.getItem("input") || "",
     filmList: [],
   };
 
   componentDidMount() {
-    if (localStorage.getItem('input')) {
+    if (localStorage.getItem("input")) {
       const { input } = this.state;
       this.fetchSearch(input);
     } else {
@@ -20,13 +20,14 @@ class App extends Component {
 
   handleSubmit = async () => {
     const { input } = this.state;
-    localStorage.setItem('input', input);
-    const inputValue = input.replaceAll(' ', '%20');
+    localStorage.setItem("input", input.trim());
+    const inputValue = input.trim().replaceAll(" ", "%20");
     this.fetchSearch(inputValue);
+    this.setState({ input: input.trim() });
   };
 
   handleEnterPress = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       this.handleSubmit();
     }
   };
@@ -38,7 +39,7 @@ class App extends Component {
       const filmList = result.data.mainSearch.edges;
       this.setState({ filmList: filmList });
     } catch (e) {
-      console.log('ERROR: ', e);
+      console.log("ERROR: ", e);
     }
   };
 
@@ -47,10 +48,10 @@ class App extends Component {
       const result = await getPopular();
       console.log(result);
       const filmList = result.data.movies.edges;
-      console.log('filmList Popular ', filmList);
+      console.log("filmList Popular ", filmList);
       this.setState({ filmList: filmList });
     } catch (e) {
-      console.log('ERROR: ', e);
+      console.log("ERROR: ", e);
     }
   };
 
@@ -65,7 +66,13 @@ class App extends Component {
       <>
         <div className="container">
           <div className="search">
-            <input className="search-input" onKeyDown={this.handleEnterPress} typeof="search-input" value={input} onChange={this.handleInputChange}></input>
+            <input
+              className="search-input"
+              onKeyDown={this.handleEnterPress}
+              typeof="search-input"
+              value={input}
+              onChange={this.handleInputChange}
+            ></input>
             <button className="search-button" onClick={this.handleSubmit}>
               Search
             </button>
@@ -74,8 +81,19 @@ class App extends Component {
             {filmList.length !== 0 &&
               filmList.map((film) => (
                 <div className="film-container">
-                  <img className="film-poster" src={film?.node?.entity?.primaryImage?.url ?? film?.node?.primaryImage?.url ?? ''} />
-                  <p className="film-title">{film?.node?.entity?.titleText?.text ?? film?.node?.titleText?.text ?? ''}</p>
+                  <img
+                    className="film-poster"
+                    src={
+                      film?.node?.entity?.primaryImage?.url ??
+                      film?.node?.primaryImage?.url ??
+                      ""
+                    }
+                  />
+                  <p className="film-title">
+                    {film?.node?.entity?.titleText?.text ??
+                      film?.node?.titleText?.text ??
+                      ""}
+                  </p>
                 </div>
               ))}
           </div>
