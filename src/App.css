@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+.bad-search {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
