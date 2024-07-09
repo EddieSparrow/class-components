@@ -15,12 +15,14 @@ interface State {
     movie_count?: number;
     movies?: Movies[];
   };
+  loader: boolean;
 }
 
 class App extends Component {
   state: State = {
     input: localStorage.getItem('input') || '',
     filmList: {},
+    loader: true,
   };
 
   componentDidMount() {
@@ -48,9 +50,11 @@ class App extends Component {
 
   fetchSearch = async (inputValue: string) => {
     try {
+      this.setState({ loader: true });
       const result = await getSearch(inputValue);
       const filmList = result.data;
       this.setState({ filmList: filmList });
+      this.setState({ loader: false });
     } catch (e) {
       console.log('ERROR: ', e);
     }
@@ -61,6 +65,7 @@ class App extends Component {
       const result = await getPopular();
       const filmList = result.data;
       this.setState({ filmList: filmList });
+      this.setState({ loader: false });
     } catch (e) {
       console.log('ERROR: ', e);
     }
@@ -72,7 +77,7 @@ class App extends Component {
   };
 
   render() {
-    const { input, filmList } = this.state;
+    const { input, filmList, loader } = this.state;
 
     return (
       <div className="container">
@@ -86,17 +91,20 @@ class App extends Component {
           </div>
         </div>
         <div className="results">
-          {filmList.movie_count === 0 ? (
+          {loader === true ? (
+            <div className="bad-search">
+              <span className="loader"></span>
+              <p>Loading</p>
+            </div>
+          ) : filmList.movie_count === 0 ? (
             <div className="bad-search">nothing found</div>
-          ) : filmList.movies?.length !== 0 ? (
+          ) : (
             filmList.movies?.map((film) => (
               <div className="film-container">
                 <img className="film-poster" src={film.medium_cover_image ?? ''} />
                 <p className="film-title">{film.title ?? ''}</p>
               </div>
             ))
-          ) : (
-            <div className="bad-search">Loading</div>
           )}
         </div>
       </div>
