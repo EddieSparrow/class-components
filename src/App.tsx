@@ -1,47 +1,28 @@
-import "./App.css";
-import { ChangeEvent, useEffect, useState } from "react";
-import CrashButton from "./components/buttons/CrashButton";
-import Search from "./components/Search/Search";
-import useGetData from "./components/Search/useGetData";
-import fetchSearch from "./utils/functions/fetchSearch";
-import Films from "./components/films/Films";
+import './App.css';
+import { useEffect } from 'react';
+import CrashButton from './components/buttons/CrashButton';
+import Search from './components/Search/Search';
+import useGetData from './components/Search/useGetData';
+import Films from './components/films/Films';
+import fetchSearch from './utils/functions/fetchSearch';
+import Pagination from './components/Pagination/Pagination';
 
 export default function App() {
   const storedInput = useGetData();
-  const [input, setInput] = useState(storedInput);
+  const getFetchSearch = fetchSearch();
 
   useEffect(() => {
-    fetchSearch(storedInput);
-  }, [storedInput]);
-
-  useEffect(() => {
-    setInput(input);
-  }, [input]);
-
-  async function handleSubmit() {
-    console.log("dfgdf");
-    localStorage.setItem("input", input.trim());
-    const inputValue = input.trim().replaceAll(" ", "%20");
-    fetchSearch(inputValue);
-    setInput(input.trim());
-  }
-
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const inputValue = event.target.value.toString();
-    setInput(inputValue);
-  }
+    getFetchSearch(storedInput);
+  }, []);
 
   return (
     <div className="container">
       <div className="header">
         <CrashButton />
-        <Search
-          value={input}
-          onChange={handleInputChange}
-          onClick={handleSubmit}
-        />
+        <Search />
       </div>
       <Films />
+      <Pagination />
     </div>
   );
 }

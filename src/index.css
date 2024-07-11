@@ -53,10 +53,11 @@ button:hover,
 }
 
 .container {
-  display: grid;
+  display: flex;
   height: 100%;
-  grid-template-rows: 3% 1fr;
+  flex-direction: column;
   align-items: center;
+  gap: 1rem;
 }
 
 .search {
