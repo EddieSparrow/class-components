@@ -7,10 +7,11 @@ export const FilmListContext = createContext<FilmContext | null>(null);
 export function FilmsProvider({ children }: PropsWithChildren) {
   const storedInput = useGetData();
   const [filmList, setFilmList] = useState<FilmList>({});
-  const [page, setPage] = useState(1);
   const [filmsPerPage, setFilmsPerPage] = useState(20);
   const [movieCount, setMovieCount] = useState(1);
   const [input, setInput] = useState(storedInput);
+  const [page, setPage] = useState(1);
+  const [selectedFilm, setSelectedFilm] = useState(null);
 
   return (
     <FilmListContext.Provider
@@ -25,6 +26,8 @@ export function FilmsProvider({ children }: PropsWithChildren) {
         setMovieCount,
         input,
         setInput,
+        selectedFilm,
+        setSelectedFilm,
       }}
     >
       {children}

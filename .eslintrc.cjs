@@ -15,6 +15,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "react-hooks/exhaustive-deps": "off",
     "react-compiler/react-compiler": "error",
     "@typescript-eslint/no-explicit-any": "error",
   },

@@ -1,0 +1,46 @@
+.container__details {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 6rem;
+  margin-left: 2rem;
+  margin: 0 auto;
+  height: 100%;
+  background-color: white;
+}
+
+.container__details-close {
+  position: absolute;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+}
+
+.container__details-close hr {
+  color: black;
+  border: 2px solid black;
+  width: 2rem;
+}
+
+.container__details-close-1 {
+  position: absolute;
+  rotate: 46deg;
+}
+
+.container__details-close-2 {
+  position: absolute;
+  rotate: -46deg;
+}
+
+.blur {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
+}

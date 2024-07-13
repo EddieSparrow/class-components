@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FetchSearch from '../../utils/functions/fetchSearch';
 import { useFilmContext } from '../films/useContext';
+import { useParams } from 'react-router-dom';
 
 export default function Pagination() {
   const { page, setPage, filmsPerPage, movieCount, input } = useFilmContext();
+  const { pageNumber } = useParams<{ pageNumber: string }>();
   const getFetchSearch = FetchSearch();
   const pageCount = [];
 
   useEffect(() => {
     getFetchSearch(input);
-  }, [page]);
+  }, [page, pageNumber]);
 
   for (let i = 1; i <= Math.ceil(movieCount / filmsPerPage); i++) {
     pageCount.push(i);
@@ -23,9 +26,9 @@ export default function Pagination() {
     <>
       <ul className="pagination">
         {pageCount.map((pageNumber) => (
-          <li key={pageNumber} onClick={() => handlePage(pageNumber)}>
-            {pageNumber}
-          </li>
+          <Link key={pageNumber} to={`/search/${pageNumber}`}>
+            <li onClick={() => handlePage(pageNumber)}>{pageNumber}</li>
+          </Link>
         ))}
       </ul>
     </>

@@ -1,28 +1,38 @@
 import './App.css';
-import { useEffect } from 'react';
 import CrashButton from './components/buttons/CrashButton';
 import Search from './components/Search/Search';
-import useGetData from './components/Search/useGetData';
 import Films from './components/films/Films';
-import fetchSearch from './utils/functions/fetchSearch';
 import Pagination from './components/Pagination/Pagination';
+import { useEffect } from 'react';
+import { useFilmContext } from './components/films/useContext';
+import { useParams } from 'react-router-dom';
+import { FilmsProvider } from './components/films/FilmsContext';
+import Details from './components/Details/Details';
 
 export default function App() {
-  const storedInput = useGetData();
-  const getFetchSearch = fetchSearch();
+  const { pageNumber } = useParams<{ pageNumber: string }>();
+  const parsedPageNumber = parseInt(pageNumber, 10) || 1;
+  const { setPage } = useFilmContext();
 
   useEffect(() => {
-    getFetchSearch(storedInput);
+    if (pageNumber) {
+      setPage(parseInt(pageNumber));
+    }
   }, []);
 
   return (
-    <div className="container">
-      <div className="header">
-        <CrashButton />
-        <Search />
+    <FilmsProvider initialPage={parsedPageNumber}>
+      <div className="container">
+        <div className="films">
+          <div className="header">
+            <CrashButton />
+            <Search />
+          </div>
+          <Films />
+          <Pagination />
+        </div>
+        <Details />
       </div>
-      <Films />
-      <Pagination />
-    </div>
+    </FilmsProvider>
   );
 }

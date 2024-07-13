@@ -20,4 +20,6 @@ export interface FilmContext {
   setMovieCount: React.Dispatch<React.SetStateAction<number>>;
   input: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
+  selectedFilm: Movies;
+  setSelectedFilm: React.Dispatch<React.SetStateAction<Movies>>;
 }
