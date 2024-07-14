@@ -1,6 +1,6 @@
-import { useState, createContext, PropsWithChildren } from "react";
-import { FilmContext, FilmList } from "../../types/FilmContextInterface";
-import useGetData from "../Search/useGetData";
+import { useState, createContext, PropsWithChildren } from 'react';
+import { FilmContext, FilmList, Movies } from '../../types/FilmContextInterface';
+import useGetData from '../Search/useGetData';
 
 export const FilmListContext = createContext<FilmContext | null>(null);
 
@@ -11,7 +11,7 @@ export function FilmsProvider({ children }: PropsWithChildren) {
   const [movieCount, setMovieCount] = useState(1);
   const [input, setInput] = useState(storedInput);
   const [page, setPage] = useState(1);
-  const [selectedFilm, setSelectedFilm] = useState(null);
+  const [selectedFilm, setSelectedFilm] = useState<Movies | null>(null);
 
   return (
     <FilmListContext.Provider

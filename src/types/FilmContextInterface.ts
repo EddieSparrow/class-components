@@ -1,7 +1,11 @@
 export interface Movies {
-  medium_cover_image: string;
+  medium_cover_image?: string;
   title: string;
   id?: number;
+  runtime: number;
+  rating: number;
+  year: number;
+  genres: [];
 }
 
 export interface FilmList {
@@ -20,6 +24,6 @@ export interface FilmContext {
   setMovieCount: React.Dispatch<React.SetStateAction<number>>;
   input: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
-  selectedFilm: Movies;
-  setSelectedFilm: React.Dispatch<React.SetStateAction<Movies>>;
+  selectedFilm?: Movies | null;
+  setSelectedFilm: React.Dispatch<React.SetStateAction<Movies | null>>;
 }
