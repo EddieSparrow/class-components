@@ -1,6 +1,6 @@
-import { useState, createContext, PropsWithChildren } from 'react';
-import { FilmContext, FilmList } from '../../types/FilmContextInterface';
-import useGetData from '../Search/useGetData';
+import { useState, createContext, PropsWithChildren } from "react";
+import { FilmContext, FilmList } from "../../types/FilmContextInterface";
+import useGetData from "../Search/useGetData";
 
 export const FilmListContext = createContext<FilmContext | null>(null);
 

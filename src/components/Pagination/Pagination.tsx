@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import FetchSearch from '../../utils/functions/fetchSearch';
-import { useFilmContext } from '../films/useContext';
-import { useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import FetchSearch from "../../utils/functions/fetchSearch";
+import { useFilmContext } from "../films/useContext";
+import { useParams } from "react-router-dom";
 
 export default function Pagination() {
   const { page, setPage, filmsPerPage, movieCount, input } = useFilmContext();
