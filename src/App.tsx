@@ -8,6 +8,7 @@ import { useFilmContext } from './components/films/useContext';
 import { useParams } from 'react-router-dom';
 import { FilmsProvider } from './components/films/FilmsContext';
 import Details from './components/Details/Details';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 export default function App() {
   const { pageNumber } = useParams<{ pageNumber: string }>();
@@ -20,18 +21,20 @@ export default function App() {
   }, []);
 
   return (
-    <FilmsProvider>
-      <div className="container">
-        <div className="films">
-          <div className="header">
-            <CrashButton />
-            <Search />
+    <ErrorBoundary>
+      <FilmsProvider>
+        <div className="container">
+          <div className="films">
+            <div className="header">
+              <CrashButton />
+              <Search />
+            </div>
+            <Films />
+            <Pagination />
           </div>
-          <Films />
-          <Pagination />
+          <Details />
         </div>
-        <Details />
-      </div>
-    </FilmsProvider>
+      </FilmsProvider>
+    </ErrorBoundary>
   );
 }

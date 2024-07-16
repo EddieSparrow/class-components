@@ -1,22 +1,21 @@
-import { Component } from "react";
+import { useState } from 'react';
 
-export default class CrashButton extends Component {
-  state = {
-    counter: 0,
-  };
-  handleClick = () => {
-    this.setState({
-      counter: this.state.counter + 1,
-    });
-  };
-  render() {
-    if (this.state.counter === 1) {
-      throw new Error("I crashed!");
-    }
-    return (
-      <div>
-        <button onClick={this.handleClick}>Crash</button>
-      </div>
-    );
+export default function CrashButton() {
+  const [counter, setCounter] = useState(0);
+
+  function handleClick() {
+    const newCounter = counter + 1;
+    console.log('Counter:', newCounter);
+    setCounter(newCounter);
   }
+
+  if (counter === 1) {
+    throw new Error('I crashed!');
+  }
+
+  return (
+    <div>
+      <button onClick={handleClick}>Crash</button>
+    </div>
+  );
 }
