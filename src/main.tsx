@@ -1,40 +1,40 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import "./components/Pagination/pagination.css";
-import "./components/Details/details.css";
-import EmptyPage from "./components/EmptyPage/EmptyPage.tsx";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary.tsx";
-import { FilmsProvider } from "./components/films/FilmsContext.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Details from "./components/Details/Details.tsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import './components/Pagination/pagination.css';
+import './components/Details/details.css';
+import EmptyPage from './components/EmptyPage/EmptyPage.tsx';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx';
+import { FilmsProvider } from './components/films/FilmsContext.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Details from './components/Details/Details.tsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
   {
-    path: "*",
+    path: '*',
     element: <EmptyPage />,
   },
   {
-    path: "/search/:pageNumber",
+    path: '/search/:pageNumber',
     element: <App />,
   },
   {
-    path: "/?frontpage=2&details=:filmID",
+    path: '/?frontpage=2&details=:filmID',
     element: <Details />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <FilmsProvider>
         <RouterProvider router={router} />
       </FilmsProvider>
     </ErrorBoundary>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
