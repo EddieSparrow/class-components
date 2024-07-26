@@ -1,22 +1,24 @@
-import { ChangeEvent, useEffect } from "react";
-import fetchSearch from "../../utils/functions/fetchSearch";
-import { useFilmContext } from "../films/useContext";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useGetFilmsQuery } from '../../utils/api/apiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setInputValue, setPage } from './searchSlice';
 
 export default function Search() {
-  const { input, setInput, setPage } = useFilmContext();
+  const dispatch = useDispatch();
+  const [input, setInput] = useState('');
 
-  const getFetchSearch = fetchSearch();
+  const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
+  const { error, isLoading } = useGetFilmsQuery({ inputValue: inputValue.trim().replaceAll(' ', '%20'), limit, page });
 
   useEffect(() => {
-    setInput(input);
-  }, [input, setInput]);
+    setInput(inputValue);
+    dispatch(setInputValue(input));
+  }, [inputValue, input]);
 
-  async function handleSubmit() {
-    localStorage.setItem("input", input.trim());
-    const inputValue = input.trim().replaceAll(" ", "%20");
-    getFetchSearch(inputValue);
-    setInput(input.trim());
-    setPage(1);
+  function handleSubmit() {
+    localStorage.setItem('input', inputValue);
+    dispatch(setPage(1));
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -25,19 +27,17 @@ export default function Search() {
   }
 
   function handleEnterPress(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSubmit();
     }
   }
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div className="search">
-      <input
-        className="search-input"
-        onKeyDown={handleEnterPress}
-        value={input}
-        onChange={handleInputChange}
-      ></input>
+      <input className="search-input" onKeyDown={handleEnterPress} value={input} onChange={handleInputChange}></input>
       <button className="search-button" onClick={handleSubmit}>
         Search
       </button>

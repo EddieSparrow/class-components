@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom';
 import { FilmsProvider } from './components/films/FilmsContext';
 import Details from './components/Details/Details';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import { store } from './store';
+import { Provider } from 'react-redux';
 
 export default function App() {
   const { pageNumber } = useParams<{ pageNumber: string }>();
@@ -21,20 +23,22 @@ export default function App() {
   }, []);
 
   return (
-    <ErrorBoundary>
-      <FilmsProvider>
-        <div className="container">
-          <div className="films">
-            <div className="header">
-              <CrashButton />
-              <Search />
+    <Provider store={store}>
+      <ErrorBoundary>
+        <FilmsProvider>
+          <div className="container">
+            <div className="films">
+              <div className="header">
+                <CrashButton />
+                <Search />
+              </div>
+              <Films />
+              <Pagination />
             </div>
-            <Films />
-            <Pagination />
+            <Details />
           </div>
-          <Details />
-        </div>
-      </FilmsProvider>
-    </ErrorBoundary>
+        </FilmsProvider>
+      </ErrorBoundary>
+    </Provider>
   );
 }

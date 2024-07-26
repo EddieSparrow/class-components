@@ -1,3 +1,9 @@
+export interface FilmsApi {
+  inputValue?: string;
+  limit?: number;
+  page?: number;
+}
+
 export interface Movies {
   medium_cover_image?: string;
   title: string;

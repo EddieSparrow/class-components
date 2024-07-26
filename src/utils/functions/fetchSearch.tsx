@@ -1,5 +1,5 @@
-import getSearch from "../api/getSearch";
-import { useFilmContext } from "../../components/films/useContext";
+import getSearch from '../api/getSearch';
+import { useFilmContext } from '../../components/films/useContext';
 
 export default function FetchSearch() {
   const { setFilmList, filmsPerPage, page, setMovieCount } = useFilmContext();
@@ -11,7 +11,7 @@ export default function FetchSearch() {
       setFilmList(filmList);
       setMovieCount(filmList.movie_count);
     } catch (e) {
-      console.log("ERROR: ", e);
+      console.log('ERROR: ', e);
     }
   };
 
