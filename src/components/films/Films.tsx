@@ -10,7 +10,16 @@ export default function Films() {
   const { setSelectedFilm } = useFilmContext();
   const [searchParams] = useSearchParams();
   const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
-  const { data: filmList, error, isLoading } = useGetFilmsQuery({ inputValue: inputValue.trim().replaceAll(' ', '%20'), limit, page });
+
+  const {
+    data: filmList,
+    error,
+    isLoading,
+  } = useGetFilmsQuery({
+    inputValue: inputValue.trim().replaceAll(' ', '%20'),
+    limit,
+    page,
+  });
 
   useEffect(() => {
     const details = searchParams.get('details');
