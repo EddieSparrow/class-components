@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Movies } from '../../types/FilmContextInterface';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Movies } from "../../types/FilmContextInterface";
 
 interface SelectedFilmState {
   selectedFilm: Movies | null;
@@ -10,7 +10,7 @@ const initialState: SelectedFilmState = {
 };
 
 const selectedFilmSlice = createSlice({
-  name: 'selected',
+  name: "selected",
   initialState,
   reducers: {
     setSelectedFilm(state, action: PayloadAction<Movies | null>) {

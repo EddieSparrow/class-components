@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import FetchSearch from '../../utils/functions/fetchSearch';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetFilmsQuery } from '../../utils/api/apiSlice';
-import { setPage } from '../Search/searchSlice';
+import { setInputValue, setPage } from '../Search/searchSlice';
 import { RootState } from '../../store';
 
 export default function Pagination() {
   const { pageNumber } = useParams<{ pageNumber: string }>();
-  const getFetchSearch = FetchSearch();
   const pageCount = [];
   const dispatch = useDispatch();
   const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
@@ -24,7 +22,7 @@ export default function Pagination() {
   });
 
   useEffect(() => {
-    getFetchSearch(inputValue);
+    dispatch(setInputValue(inputValue));
   }, [page, pageNumber]);
 
   if (filmList?.data?.movie_count) {

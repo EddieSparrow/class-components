@@ -1,14 +1,10 @@
-import { useState, createContext, PropsWithChildren } from "react";
-import {
-  FilmContext,
-  FilmList,
-  Movies,
-} from "../../types/FilmContextInterface";
-import useGetData from "../Search/useGetData";
+import { useState, createContext, PropsWithChildren } from 'react';
+import { FilmContext, FilmList, Movies } from '../../types/FilmContextInterface';
+import useGetData from '../Search/useGetData';
 
-export const FilmListContext = createContext<FilmContext | null>(null);
+export const ThemeContext = createContext<FilmContext | null>(null);
 
-export function FilmsProvider({ children }: PropsWithChildren) {
+export function ThemeProvider({ children }: PropsWithChildren) {
   const storedInput = useGetData();
   const [filmList, setFilmList] = useState<FilmList>({});
   const [filmsPerPage, setFilmsPerPage] = useState(20);
@@ -18,7 +14,7 @@ export function FilmsProvider({ children }: PropsWithChildren) {
   const [selectedFilm, setSelectedFilm] = useState<Movies | null>(null);
 
   return (
-    <FilmListContext.Provider
+    <ThemeContext.Provider
       value={{
         filmList,
         setFilmList,
@@ -35,6 +31,6 @@ export function FilmsProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-    </FilmListContext.Provider>
+    </ThemeContext.Provider>
   );
 }

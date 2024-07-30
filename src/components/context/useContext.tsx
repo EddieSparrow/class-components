@@ -1,9 +1,9 @@
 import { FilmContext } from '../../types/FilmContextInterface';
-import { FilmListContext } from './FilmsContext';
+import { ThemeContext } from './Context';
 import { useContext } from 'react';
 
-export function useFilmContext(): FilmContext {
-  const context = useContext(FilmListContext);
+export function useThemeContext(): FilmContext {
+  const context = useContext(ThemeContext);
   if (context === null) {
     throw new Error('useFilmContext must be used within a FilmsProvider');
   } else {
