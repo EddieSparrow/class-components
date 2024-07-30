@@ -1,6 +1,10 @@
-import { useState, createContext, PropsWithChildren } from 'react';
-import { FilmContext, FilmList, Movies } from '../../types/FilmContextInterface';
-import useGetData from '../Search/useGetData';
+import { useState, createContext, PropsWithChildren } from "react";
+import {
+  FilmContext,
+  FilmList,
+  Movies,
+} from "../../types/FilmContextInterface";
+import useGetData from "../Search/useGetData";
 
 export const ThemeContext = createContext<FilmContext | null>(null);
 

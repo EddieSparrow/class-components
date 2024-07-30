@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function CrashButton() {
   const [counter, setCounter] = useState(0);
@@ -9,7 +9,7 @@ export default function CrashButton() {
   }
 
   if (counter === 1) {
-    throw new Error('I crashed!');
+    throw new Error("I crashed!");
   }
 
   return (
