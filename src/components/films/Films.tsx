@@ -1,15 +1,15 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { Movies } from '../../types/FilmContextInterface';
 import { useGetFilmsQuery } from '../../utils/api/apiSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect } from 'react';
-import { useFilmContext } from './useContext';
+import { setSelectedFilm } from '../Details/selectedFilmSlice';
 
 export default function Films() {
-  const { setSelectedFilm } = useFilmContext();
   const [searchParams] = useSearchParams();
   const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
+  const dispatch = useDispatch();
 
   const {
     data: filmList,
@@ -25,12 +25,12 @@ export default function Films() {
     const details = searchParams.get('details');
     if (details) {
       const film = filmList.data.movies?.find((film) => film.id === parseInt(details));
-      setSelectedFilm(film!);
+      dispatch(setSelectedFilm(film!));
     }
   }, [searchParams, filmList]);
 
   function handleFilm(film: Movies) {
-    setSelectedFilm(film);
+    dispatch(setSelectedFilm(film));
   }
 
   if (isLoading) return <div>Loading...</div>;
