@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
   inputValue: string;
@@ -7,13 +7,13 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-  inputValue: "",
+  inputValue: '',
   page: 1,
   limit: 10,
 };
 
 const searchSlice = createSlice({
-  name: "search",
+  name: 'search',
   initialState,
   reducers: {
     setPage(state, action: PayloadAction<number>) {

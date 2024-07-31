@@ -1,40 +1,18 @@
-import { useState, createContext, PropsWithChildren } from "react";
-import {
-  FilmContext,
-  FilmList,
-  Movies,
-} from "../../types/FilmContextInterface";
-import useGetData from "../Search/useGetData";
+import { useState, createContext, PropsWithChildren, useEffect } from 'react';
+import { Theme, ThemeContextProps } from './ThemeContextInterface';
 
-export const ThemeContext = createContext<FilmContext | null>(null);
+export const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-  const storedInput = useGetData();
-  const [filmList, setFilmList] = useState<FilmList>({});
-  const [filmsPerPage, setFilmsPerPage] = useState(20);
-  const [movieCount, setMovieCount] = useState(1);
-  const [input, setInput] = useState(storedInput);
-  const [page, setPage] = useState(1);
-  const [selectedFilm, setSelectedFilm] = useState<Movies | null>(null);
+  const [theme, setTheme] = useState<Theme>('light');
 
-  return (
-    <ThemeContext.Provider
-      value={{
-        filmList,
-        setFilmList,
-        page,
-        setPage,
-        filmsPerPage,
-        setFilmsPerPage,
-        movieCount,
-        setMovieCount,
-        input,
-        setInput,
-        selectedFilm,
-        setSelectedFilm,
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
-  );
+  function toggleTheme() {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  }
+
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
+
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
