@@ -12,6 +12,7 @@ import { setInputValue, setPage } from './components/Search/searchSlice';
 import useGetData from './components/Search/useGetData';
 import ThemeToggleButton from './components/buttons/ToggleButton';
 import { ThemeContext } from './components/context/Context';
+import ItemCounter from './components/itemCounter/ItemCounter';
 
 export default function App() {
   const { theme } = useContext(ThemeContext);
@@ -40,6 +41,7 @@ export default function App() {
           <Pagination />
         </div>
         <Details />
+        <ItemCounter />
       </div>
     </ErrorBoundary>
   );

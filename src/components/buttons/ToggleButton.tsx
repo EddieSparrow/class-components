@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useThemeContext } from '../context/useContext';
+import { useState } from "react";
+import { useThemeContext } from "../context/useContext";
 
 export default function ThemeToggleButton() {
-  const { theme, toggleTheme } = useThemeContext();
+  const { toggleTheme } = useThemeContext();
   const [isChecked, setIsChecked] = useState(true);
 
   function handleCheckboxChange() {
@@ -20,7 +20,7 @@ export default function ThemeToggleButton() {
           }}
         />
         <span className="slider"></span>
-      </label>{' '}
+      </label>{" "}
     </div>
   );
 }

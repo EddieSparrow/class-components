@@ -1,0 +1,7 @@
+.film-checkbox {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  margin: 1rem;
+  cursor: pointer;
+}

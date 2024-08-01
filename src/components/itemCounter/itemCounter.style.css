@@ -1,0 +1,21 @@
+.item-coutner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem;
+}
+
+.item-coutner__buttons {
+  display: flex;
+  gap: 1rem;
+}

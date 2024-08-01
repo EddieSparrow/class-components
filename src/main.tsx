@@ -5,6 +5,8 @@ import './index.css';
 import './components/Pagination/pagination.css';
 import './components/buttons/toggleButton.css';
 import './components/Details/details.css';
+import './components/films/film.style.css';
+import './components/itemCounter/itemCounter.style.css';
 import EmptyPage from './components/EmptyPage/EmptyPage.tsx';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx';
 import { ThemeProvider } from './components/context/Context.tsx';
