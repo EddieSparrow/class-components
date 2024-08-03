@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const itemCounterSlice = createSlice({
-  name: 'itemCounter',
+  name: "itemCounter",
   initialState,
   reducers: {
     setItems(state, action) {

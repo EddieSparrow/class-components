@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { setCount, setItems } from './itemCounterSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { setCount, setItems } from "./itemCounterSlice";
 
 export default function ItemCounter() {
   const { count } = useSelector((state: RootState) => state.itemCounter);
