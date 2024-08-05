@@ -12,7 +12,7 @@ export function convertToCSV(data) {
   return [headers.join(','), ...rows].join('\r\n');
 }
 
-export function downloadCSV(data, filename = 'data.csv') {
+export function downloadCSV(data, filename) {
   const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);

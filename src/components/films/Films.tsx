@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect } from 'react';
 import { setSelectedFilm } from '../Details/selectedFilmSlice';
-import { setCount, setItems } from '../itemCounter/itemCounterSlice';
+import { setItems } from '../itemCounter/itemCounterSlice';
 
 export default function Films() {
   const [searchParams] = useSearchParams();
   const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
-  const { items, count } = useSelector((state: RootState) => state.itemCounter);
+  const { items } = useSelector((state: RootState) => state.itemCounter);
   const dispatch = useDispatch();
 
   const {
@@ -39,14 +39,11 @@ export default function Films() {
     const isChecked = event.checked;
     if (isChecked) {
       dispatch(setItems({ ...items, [newItem.id]: newItem }));
-      dispatch(setCount(count + 1));
     } else {
       const newItems = { ...items };
       delete newItems[newItem.id];
       dispatch(setItems(newItems));
     }
-    console.log([...items]);
-    console.log(count);
   }
 
   if (isLoading) return <div>Loading...</div>;
@@ -59,7 +56,7 @@ export default function Films() {
       ) : filmList.data.movies?.length !== 0 ? (
         filmList.data.movies?.map((film: Movies) => (
           <div>
-            <input className="film-checkbox" type="checkbox" onChange={(event) => handleCheckbox(film, event.target)} checked={items.hasOwnProperty(film.id)} />
+            <input className="film-checkbox" type="checkbox" onChange={(event) => handleCheckbox(film, event.target)} checked={Object.prototype.hasOwnProperty.call(items, film.id)} />
             <Link key={film.id} to={`/?frontpage=2&details=${film.id}`}>
               <div key={film.id} className="film-container" onClick={() => handleFilm(film)}>
                 <img className="film-poster" src={film.medium_cover_image ?? ''} />

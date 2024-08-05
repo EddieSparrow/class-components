@@ -14,7 +14,7 @@ export default function ItemCounter() {
 
   function handleDownload() {
     const csv = convertToCSV(items);
-    downloadCSV(csv);
+    downloadCSV(csv, `${count}_films`);
   }
 
   if (count === 0) {
