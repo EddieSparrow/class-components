@@ -6,18 +6,18 @@ export function convertToCSV(data) {
       .map((header) => {
         return JSON.stringify(row[header]);
       })
-      .join(',');
+      .join(",");
   });
 
-  return [headers.join(','), ...rows].join('\r\n');
+  return [headers.join(","), ...rows].join("\r\n");
 }
 
 export function downloadCSV(data, filename) {
-  const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
+  const blob = new Blob([data], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
   const url = URL.createObjectURL(blob);
-  link.setAttribute('href', url);
-  link.setAttribute('download', filename);
+  link.setAttribute("href", url);
+  link.setAttribute("download", filename);
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

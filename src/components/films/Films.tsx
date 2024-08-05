@@ -1,15 +1,17 @@
-import { Link, useSearchParams } from 'react-router-dom';
-import { Movies } from '../../types/FilmContextInterface';
-import { useGetFilmsQuery } from '../../utils/api/apiSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { useEffect } from 'react';
-import { setSelectedFilm } from '../Details/selectedFilmSlice';
-import { setItems } from '../itemCounter/itemCounterSlice';
+import { Link, useSearchParams } from "react-router-dom";
+import { Movies } from "../../types/FilmContextInterface";
+import { useGetFilmsQuery } from "../../utils/api/apiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useEffect } from "react";
+import { setSelectedFilm } from "../Details/selectedFilmSlice";
+import { setItems } from "../itemCounter/itemCounterSlice";
 
 export default function Films() {
   const [searchParams] = useSearchParams();
-  const { inputValue, page, limit } = useSelector((state: RootState) => state.search);
+  const { inputValue, page, limit } = useSelector(
+    (state: RootState) => state.search,
+  );
   const { items } = useSelector((state: RootState) => state.itemCounter);
   const dispatch = useDispatch();
 
@@ -18,15 +20,17 @@ export default function Films() {
     error,
     isLoading,
   } = useGetFilmsQuery({
-    inputValue: inputValue.trim().replaceAll(' ', '%20'),
+    inputValue: inputValue.trim().replaceAll(" ", "%20"),
     limit,
     page,
   });
 
   useEffect(() => {
-    const details = searchParams.get('details');
+    const details = searchParams.get("details");
     if (details) {
-      const film = filmList.data.movies?.find((film) => film.id === parseInt(details));
+      const film = filmList.data.movies?.find(
+        (film) => film.id === parseInt(details),
+      );
       dispatch(setSelectedFilm(film));
     }
   }, [searchParams, filmList]);
@@ -56,11 +60,23 @@ export default function Films() {
       ) : filmList.data.movies?.length !== 0 ? (
         filmList.data.movies?.map((film: Movies) => (
           <div>
-            <input className="film-checkbox" type="checkbox" onChange={(event) => handleCheckbox(film, event.target)} checked={Object.prototype.hasOwnProperty.call(items, film.id)} />
+            <input
+              className="film-checkbox"
+              type="checkbox"
+              onChange={(event) => handleCheckbox(film, event.target)}
+              checked={Object.prototype.hasOwnProperty.call(items, film.id)}
+            />
             <Link key={film.id} to={`/?frontpage=2&details=${film.id}`}>
-              <div key={film.id} className="film-container" onClick={() => handleFilm(film)}>
-                <img className="film-poster" src={film.medium_cover_image ?? ''} />
-                <p className="film-title">{film.title ?? ''}</p>
+              <div
+                key={film.id}
+                className="film-container"
+                onClick={() => handleFilm(film)}
+              >
+                <img
+                  className="film-poster"
+                  src={film.medium_cover_image ?? ""}
+                />
+                <p className="film-title">{film.title ?? ""}</p>
               </div>
             </Link>
           </div>

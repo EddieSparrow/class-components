@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { setCount, setItems } from './itemCounterSlice';
-import { convertToCSV, downloadCSV } from '../../utils/csvConverterAndDownload';
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { setCount, setItems } from "./itemCounterSlice";
+import { convertToCSV, downloadCSV } from "../../utils/csvConverterAndDownload";
 
 export default function ItemCounter() {
   const { items, count } = useSelector((state: RootState) => state.itemCounter);
